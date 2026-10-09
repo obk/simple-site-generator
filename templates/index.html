@@ -1,0 +1,5 @@
+{{define "main"}}<h1>{{.Title}}</h1>
+<ul class="posts">
+{{range .Posts}}<li><span class="date">{{if not .Time.IsZero}}{{.Time.Format "2006-01-02"}}{{end}}</span><span><a href="/posts/{{.Slug}}/">{{.Title}}</a>{{if .Description}}<span class="desc">{{.Description}}</span>{{end}}</span></li>
+{{end}}</ul>
+{{end}}
