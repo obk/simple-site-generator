@@ -1,0 +1,274 @@
+/* Swiss minimal: Inter, white, black, one red. */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --fg: #111;
+  --bg: #fff;
+  --muted: #767676;
+  --accent: #e30613;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #f2f2f2;
+    --bg: #111;
+    --muted: #9a9a9a;
+    --accent: #ff4b4b;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font:
+    16px/1.65 "Inter",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  counter-reset: sn;
+}
+article {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 8rem;
+}
+
+h1,
+h2 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+h1 {
+  font-size: 2.5rem;
+  margin: 2rem 0 0.5rem;
+}
+h2 {
+  font-size: 1.25rem;
+  margin: 2.5rem 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+p {
+  margin: 0 0 1.25rem;
+}
+.subtitle {
+  color: var(--muted);
+  margin: 0 0 2.5rem;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  color: var(--accent);
+}
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+a.back {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+}
+a.back:hover {
+  color: var(--accent);
+}
+
+ul,
+ol {
+  padding-left: 1.25rem;
+  margin: 0 0 1.25rem;
+}
+blockquote {
+  margin: 0 0 1.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+}
+blockquote p {
+  margin: 0 0 0.25rem;
+}
+blockquote footer {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+code,
+pre {
+  font:
+    0.875rem/1.5 ui-monospace,
+    "SF Mono",
+    Menlo,
+    Consolas,
+    monospace;
+}
+pre {
+  margin: 0 0 1.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--fg);
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  margin: 0 0 1.25rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+}
+th,
+td {
+  padding: 0.25rem 0.5rem 0.25rem 0;
+  text-align: left;
+}
+th {
+  font-weight: 600;
+  border-bottom: 1px solid var(--fg);
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  color: var(--fg);
+}
+figure {
+  margin: 0 0 1.25rem;
+}
+figcaption {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Sidenotes: in the right margin on wide screens, toggled inline on narrow ones. */
+input.margin-toggle {
+  display: none;
+}
+.sidenote,
+.marginnote {
+  display: none;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+label.sidenote-number::after {
+  counter-increment: sn;
+  content: counter(sn);
+  font-size: 0.7em;
+  font-weight: 600;
+  vertical-align: super;
+  color: var(--accent);
+}
+.sidenote::before {
+  content: counter(sn) " ";
+}
+label.margin-toggle:not(.sidenote-number) {
+  cursor: pointer;
+  color: var(--accent);
+}
+label.sidenote-number {
+  cursor: pointer;
+}
+input.margin-toggle:checked + .sidenote,
+input.margin-toggle:checked + .marginnote {
+  display: block;
+  margin: 0.5rem 0 1rem 1rem;
+}
+.marginnote img {
+  margin-bottom: 0.25rem;
+}
+@media (min-width: 76rem) {
+  .sidenote,
+  .marginnote,
+  input.margin-toggle:checked + .sidenote,
+  input.margin-toggle:checked + .marginnote {
+    display: block;
+    float: right;
+    clear: right;
+    width: 14rem;
+    margin: 0 -16rem 0 0;
+  }
+  label.margin-toggle:not(.sidenote-number) {
+    display: none;
+  }
+  .sidenote::before {
+    color: var(--accent);
+    font-weight: 600;
+  }
+}
+figure.fullwidth {
+  display: flow-root;
+}
+
+/* Site chrome */
+ul.posts {
+  list-style: none;
+  padding: 0;
+}
+ul.posts li {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+ul.posts .date {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+ul.posts a {
+  font-weight: 600;
+  text-decoration: none;
+}
+ul.posts a:hover {
+  text-decoration: underline;
+}
+ul.posts .desc {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+footer.site {
+  margin-top: 5rem;
+  font-size: 0.875rem;
+}
+@media (max-width: 40rem) {
+  ul.posts li {
+    grid-template-columns: 1fr;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+}
+h1 a {
+  text-decoration: none;
+}
+
+/* SVGs loaded via <img> can't inherit currentColor; flip them in dark mode. */
+@media (prefers-color-scheme: dark) {
+  img[src$=".svg"] {
+    filter: invert(1);
+  }
+}
+
+/* Lowercase everywhere, except code. */
+body {
+  text-transform: lowercase;
+}
+code,
+pre {
+  text-transform: none;
+}
